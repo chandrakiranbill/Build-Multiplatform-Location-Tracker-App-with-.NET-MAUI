@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Android manifest for Location Tracker.
+    - Location permissions are needed to track the user.
+    - INTERNET / ACCESS_NETWORK_STATE are needed to download Google Maps tiles.
+    - Replace YOUR_GOOGLE_MAPS_API_KEY with a key from the Google Cloud Console
+      (enable "Maps SDK for Android"). Without it the map will be blank/grey.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application android:allowBackup="true"
+                 android:icon="@mipmap/appicon"
+                 android:roundIcon="@mipmap/appicon_round"
+                 android:supportsRtl="true"
+                 android:label="Location Tracker">
+
+        <!-- Google Maps API key (required by the .NET MAUI Map control on Android). -->
+        <meta-data android:name="com.google.android.geo.API_KEY"
+                   android:value="YOUR_GOOGLE_MAPS_API_KEY" />
+
+        <!-- Required for Google Maps on Android 9 (API 28) and later. -->
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+    </application>
+
+    <!-- Network access for map tiles -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Location access -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
+    <!-- The app uses GPS when available but still installs on devices without it. -->
+    <uses-feature android:name="android.hardware.location" android:required="false" />
+    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+    <uses-feature android:name="android.hardware.location.network" android:required="false" />
+
+</manifest>

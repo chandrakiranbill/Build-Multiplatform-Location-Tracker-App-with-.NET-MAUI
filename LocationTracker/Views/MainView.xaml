@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    MainView: full-screen heat map of the user's recorded locations,
+    with a small control bar underneath.
+-->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:LocationTracker.Controls"
+             xmlns:vm="clr-namespace:LocationTracker.ViewModels"
+             x:Class="LocationTracker.Views.MainView"
+             x:DataType="vm:MainViewModel"
+             Title="MainView">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <!-- The custom heat map (extends Microsoft.Maui.Controls.Maps.Map). -->
+        <controls:HeatMap x:Name="HeatMapView"
+                          Grid.Row="0"
+                          Points="{Binding Points}"
+                          CellSizeMeters="150"
+                          FollowLatestPoint="True"
+                          IsShowingUser="True"
+                          IsZoomEnabled="True"
+                          IsScrollEnabled="True" />
+
+        <ActivityIndicator Grid.Row="0"
+                           IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+
+        <!-- Controls -->
+        <VerticalStackLayout Grid.Row="1"
+                             Padding="12,8"
+                             Spacing="6"
+                             BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
+
+            <Label Text="{Binding StatusText}"
+                   FontSize="13"
+                   HorizontalTextAlignment="Center"
+                   SemanticProperties.Description="Tracking status" />
+
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                <Button Grid.Column="0"
+                        Text="{Binding TrackingButtonText}"
+                        Command="{Binding ToggleTrackingCommand}" />
+                <Button Grid.Column="1"
+                        Text="Demo route"
+                        Command="{Binding SimulateRouteCommand}" />
+                <Button Grid.Column="2"
+                        Text="Clear"
+                        Style="{StaticResource SecondaryButton}"
+                        Command="{Binding ClearCommand}" />
+            </Grid>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

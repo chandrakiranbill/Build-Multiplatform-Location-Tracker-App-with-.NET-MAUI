@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Application shell. Hosts a single page (MainView) and gives it the purple
+    navigation bar titled "MainView" shown in the assignment layout.
+    The page is resolved from the DI container because it is registered in MauiProgram.
+-->
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:LocationTracker.Views"
+       x:Class="LocationTracker.AppShell"
+       Title="Location Tracker"
+       Shell.FlyoutBehavior="Disabled">
+
+    <ShellContent Title="MainView"
+                  Route="MainView"
+                  ContentTemplate="{DataTemplate views:MainView}" />
+
+</Shell>
